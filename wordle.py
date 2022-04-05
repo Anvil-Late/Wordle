@@ -7,21 +7,14 @@ from IPython.display import display
 
 def pick_random_word():
     #Instantiate randomizer
-    r = RandomWords()
-    
-    true_word = r.get_random_word(hasDictionaryDef="true", includePartOfSpeech="noun,verb,adjective", minDictionaryCount = 3, minLength=5, maxLength=5)
-
-    while true_word == None or '-' in true_word:
-        true_word = r.get_random_word(hasDictionaryDef="true", includePartOfSpeech="noun,verb,adjective", minDictionaryCount = 3, minLength=5, maxLength=5).upper()
-    else:
-#         print(f'Word is: {true_word}')
-        return true_word
+    true_word = "cracovie"
+    return true_word
 
 #Ask User Input
 def ask_user_input(guru = None):
     while True:
-        guru = input ("Enter a 5-letter Word :")
-        if type(guru) != str or len(guru) != 5:
+        guru = input ("Enter a 8-letter Word :")
+        if type(guru) != str or len(guru) != 8:
             print('Invalid Entry')
             continue
         else:
@@ -38,7 +31,7 @@ def color_positive(val):
     return 'color: %s' % color
 
 def build_df(attempt, guess_arr):
-    cols = ['L1', 'L2', 'L3', 'L4', 'L5']
+    cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8']
     idx = ['TRY_' + str(attempt +1)]
     
     df = pd.DataFrame(guess_arr).T
@@ -128,17 +121,16 @@ def play_wordle():
         if guess_word.lower() == true_word:
             print('##############################################################')
             print(f'       HURRAY THE WORD WAS: {true_word.upper()} ')
+            print("POUR TON ANNIVERSAIRE, JE T'EMMÈNE À CRACOVIE !!!!")
             print('##############################################################')
-            print('YOU ARE A HUMAN GENIUS! YOU SHOULD BE FEARED AND RESPECTED!!!')
-            print('Give yourself a pat on the shoulder :)')
-            print("That student debt is finally paying off!!!")
-            print("WANNA PLAY AGAIN?")
+            
             break
         else:
             attempt += 1
             
             if attempt == 6:
-                print(f'Sorry, gotta read more BOOKS! The word was {true_word.upper()}, OBIOUSLY...')
+                print(f'PERDU ! Il faut rééssayer !')
+                play_wordle()
                 break
 
 if __name__ == '__main__':
